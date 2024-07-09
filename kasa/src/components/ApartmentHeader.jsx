@@ -1,7 +1,7 @@
 import React from 'react'
 import "./ApartmentHeader.css"
 
-function ApartmentHeader() {
+export function ApartmentHeader() {
   return (
     <div className='apartment__header'>
       <div className='apartment__title'>

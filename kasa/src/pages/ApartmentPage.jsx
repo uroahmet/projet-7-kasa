@@ -6,7 +6,7 @@ import { ApartmentHeader } from '../components/ApartmentHeader'
 
 
 
-function ApartmentPage() {
+export function ApartmentPage() {
   return (
     <div className='apartment-page'>
         <ApartmentBanner />
