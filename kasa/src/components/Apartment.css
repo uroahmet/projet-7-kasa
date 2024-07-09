@@ -8,6 +8,12 @@
     min-height: 200px;
 }
 
+@media screen and (width <=768px) {
+    .apartment {
+        flex-basis: 100%;
+    }
+}
+
 .apartment__subtitle {
     width: 50%;
     margin-inline-start: .5rem;
