@@ -1,0 +1,20 @@
+.error-page {
+    color: var(--red);
+    text-align: center;
+    h1 {
+        font-size: 16rem;
+        margin-bottom: 0.5em;
+    }
+    h2 {
+        font-size: 28px;
+        font-weight: 400;
+        margin-bottom: 7.5rem;
+    }
+    a {
+        color: black;
+    }
+}
+
+.footer {
+    margin-top: 53px;
+}
