@@ -1,32 +1,34 @@
 import React from 'react'
 import "./ApartmentHeader.css"
 
-export function ApartmentHeader() {
+export function ApartmentHeader({ flat }) {
+  const { name } = flat.host
+  const [firstName, lastName] = name.split (" ")
+
   return (
     <div className='apartment__header'>
       <div className='apartment__title'>
-      <h1>Crazy loft on Canal Saint Martin</h1>
-      <h2>Paris, Ile de France</h2>
+      <h1>{flat.title}</h1>
+      <h2>{flat.location}</h2>
       <div className='apartment__tags'>
-        <span>Cozy</span>
-        <span>Canal</span>
-        <span>Paris 10</span>
+       {flat.tags.map((tag) => (
+          <span key={tag}>{tag}</span>
+          ))}
       </div>
       </div>
       <div className='apartment__owner'>
       <div className='apartment__owner__details'>
         <h3>
-            <span>Alexandre</span>
-            <span>Dumas</span>
+            <span>{firstName}</span>
+            <span>{lastName}</span>
         </h3>
         <div className='apartment__owner__badge'></div>
+        <img src={flat.host.picture} alt="" />
         </div>
         <div className='apartment__owner__stars'>
-            <span className='on'>★</span>
-            <span className='on'>★</span>
-            <span className='on'>★</span>
-            <span className='off'>★</span>
-            <span className='off'>★</span>
+           {[1, 2, 3, 4, 5].map((num)=> ( // Aray de 5 et pour chaque numéro = span par défaut donc vide mais si rating >= au num actuel alors "on"
+            <span key={num} className={flat.rating >= num ? "on" : ""}>★</span>
+            ))}
       </div>
     </div>
     </div>

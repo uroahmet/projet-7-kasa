@@ -1,16 +1,14 @@
 import React from "react"
 import "./DescriptionPanel.css"
 
-export function DescriptionPanel() {
+export function DescriptionPanel(props) {
     return (
         <div className='description__panel'>
         <p className='description__header'>
-            <span>Description</span>
+            <span>{props.title}</span>
             <i className="fa-sharp fa solid fa-chevron-up"></i>
             </p>
-        <p className='description__content'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia dicta minus,
-            reiciendis vero aliquid maiores fuga perferendis praesentium doloremque, eos consectetur aut laborum,
-            maxime consequuntur fugiat! Tempore perspiciatis dicta voluptate!</p>
+        <p className='description__content'>{props.content}</p>
     </div>
   )
 }
