@@ -1,14 +1,21 @@
-import React from "react"
-import "./DescriptionPanel.css"
+import React, { useState } from "react";
+import "./DescriptionPanel.css";
 
 export function DescriptionPanel(props) {
-    return (
-        <div className='description__panel'>
-        <p className='description__header'>
-            <span>{props.title}</span>
-            <i className="fa-sharp fa solid fa-chevron-up"></i>
-            </p>
-        <p className='description__content'>{props.content}</p>
+  const [isContentVisible, setIsContentVisible] = useState(true);
+
+  const showContent = () => {
+    setIsContentVisible(!isContentVisible);
+  };
+  const contentClass = (isContentVisible ? "visible" : "hidden") + " description__content";
+  const chevronClass = (isContentVisible ? "fa-chevron-up" : "fa-chevron-down") + " fas";
+  return (
+    <div className="description__panel">
+      <p className="description__header" onClick={showContent}>
+        <span>{props.title}</span>
+        <i className={chevronClass}></i>
+      </p>
+      <p className={contentClass}>{props.content}</p>
     </div>
-  )
+  );
 }

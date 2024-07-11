@@ -27,3 +27,8 @@
 .navbar > *:first-child {
     margin-right: auto;
 }
+
+.navbar img {
+    margin-left: 7rem;
+    margin-top: 13px;
+}

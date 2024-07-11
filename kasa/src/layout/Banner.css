@@ -4,15 +4,21 @@
     background-size: cover;
     max-width: 100%;
     padding-inline: 2rem;
-    background-image: url(https://unsplash.it/800/200);
-    min-height: 140px;
+    background-image: url(accueil.jpg);
+    min-height: 214px;
     max-width: 80vw;
     margin: auto;
     border-radius: 2rem;
     display: grid;
     place-items: center;
-    color: white;
+    color: rgb(255, 255, 255);
     margin-bottom: 2rem;
+}
+
+.banner h2 {
+    font-size: 3rem;
+    font-weight: 500;
+    
 }
 
 .banner::before {
@@ -20,5 +26,5 @@
     border-radius: 2rem;
     content: "";
     inset: 0;
-    opacity: .5;
+    opacity: 0.5;
 }

@@ -14,8 +14,8 @@
 .apartment__owner {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     @media screen and (width <= 768px) {
+        justify-content: space-between;
         flex-direction: row;
     }
 }
@@ -27,7 +27,7 @@
     }
 }
 
-img {
+.apartment__owner__details img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
