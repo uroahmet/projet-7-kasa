@@ -16,9 +16,10 @@ function ApartmentGrid() {
   return (
     <div className="grid">
         {apartments.map((apartment) => (
-          <Apartment title={apartment.title} imageUrl={apartment.cover} />
+          <Apartment title={apartment.title} key={apartment.id} imageUrl={apartment.cover} id={ apartment.id }/>
         ))}
         </div>
   )
 }
+
 export default ApartmentGrid
