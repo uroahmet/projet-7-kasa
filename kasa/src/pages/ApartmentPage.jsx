@@ -3,22 +3,39 @@ import "./ApartmentPage.css";
 import { DescriptionPanel } from '../components/DescriptionPanel';
 import { ImageBanner } from '../components/ImageBanner';
 import { ApartmentHeader } from '../components/ApartmentHeader';
-import { useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 export function ApartmentPage() {
-    const location = useLocation();
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [flat, setFlat] = useState(null);
-    useEffect(fetchApartmentData, []);
+    const [error, setError] = useState(null);
 
-    function fetchApartmentData() {
-        fetch("logements.json")
-            .then((res) => res.json())
-            .then((flats) => {
-                const flat = flats.find((flat) => flat.id === location.state.apartmentId);
-                setFlat(flat);
-            });
+    useEffect(() => {
+        fetchApartmentData();
+    }, [id]);
+
+    async function fetchApartmentData() {
+        try {
+            const res = await fetch("/logements.json");
+            if (!res.ok) {
+                throw new Error(`Network response was not ok: ${res.statusText}`);
+            }
+            const flats = await res.json();
+            const flat = flats.find((flat) => flat.id === id);
+            if (!flat) {
+                navigate('/404'); // Rediriger vers la page 404 si l'appartement n'est pas trouvé
+                return;
+            }
+            setFlat(flat);
+        } catch (error) {
+            setError(error.message);
+        }
     }
-if (flat == null) return <div>...Loading</div>
+
+    if (error) return <div>Error: {error}</div>;
+    if (flat == null) return <div>...Loading</div>;
+
     return (
         <div className='apartment-page'>
             <ImageBanner pictures={flat.pictures} />
@@ -26,10 +43,8 @@ if (flat == null) return <div>...Loading</div>
             <div className='apartment__description__area'>
                 <DescriptionPanel title="Description" content={flat.description} />
                 <DescriptionPanel
-                title="Equipements"
-                content={flat.equipments.map((eq) => (
-                <li>{eq}</li>
-                ))}
+                    title="Equipements"
+                    content={<ul>{flat.equipments.map((eq, index) => (<li key={index}>{eq}</li>))}</ul>}
                 />
             </div>
         </div>

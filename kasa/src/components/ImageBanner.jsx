@@ -1,14 +1,12 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import "./ImageBanner.css";
 
-export function ImageBanner(props) {
-  const pictures = props.pictures;
-
+export function ImageBanner({ pictures = [] }) {
   const [currentPicture, setCurrentPicture] = useState(0);
 
   const getClassName = (i) => {
-    if (i === currentPicture) return "show";
-    return "";
+    return i === currentPicture ? "show" : "";
   };
 
   const moveToNext = () => {
@@ -17,44 +15,43 @@ export function ImageBanner(props) {
 
   const moveToPrevious = () => {
     const newCurrentPicture = currentPicture - 1;
-    if (newCurrentPicture < 0) {
-      setCurrentPicture(pictures.length - 1);
-      return;
-    }
-    setCurrentPicture(currentPicture - 1);
+    setCurrentPicture(newCurrentPicture < 0 ? pictures.length - 1 : newCurrentPicture);
   };
 
   const arePicturesAvailable = () => {
-    return pictures && pictures.length > 0;
+    return pictures.length > 0;
   };
 
   const getCarouselOrDefaultImage = () => {
     if (!arePicturesAvailable()) {
-      return <img src="about.jpg" className="show" alt="" />;
+      return <img src="about.jpg" className="show" alt="default" />;
     }
     return pictures.map((pic, i) => (
-      <img key={pic} src={pic} alt="" className={getClassName(i)}></img>
+      <img key={i} src={pic} alt={`slide ${i + 1}`} className={getClassName(i)} />
     ));
   };
 
-  let arrowLeft;
-  let arrowRight;
-  let countImage;
+  let arrowLeft, arrowRight, countImage;
 
   if (pictures.length > 1) {
-    arrowLeft = <button className="btn btn-previous" onClick={moveToPrevious}>
-                  <i className="fas fa-chevron-left"></i>
-                </button>;
-  
-    arrowRight =  <button className="btn btn-next" onClick={moveToNext}>
-                  <i className="fas fa-chevron-right"></i>
-                </button>;
- 
-    countImage = <span className="slide-counter">
-                  {currentPicture + 1} / {pictures.length}
-                </span> ;
-   } 
-   
+    arrowLeft = (
+      <button className="btn btn-previous" onClick={moveToPrevious}>
+        <i className="fas fa-chevron-left"></i>
+      </button>
+    );
+
+    arrowRight = (
+      <button className="btn btn-next" onClick={moveToNext}>
+        <i className="fas fa-chevron-right"></i>
+      </button>
+    );
+
+    countImage = (
+      <span className="slide-counter">
+        {currentPicture + 1} / {pictures.length}
+      </span>
+    );
+  }
 
   return (
     <div className="image__banner">
@@ -69,3 +66,7 @@ export function ImageBanner(props) {
     </div>
   );
 }
+
+ImageBanner.propTypes = {
+  pictures: PropTypes.arrayOf(PropTypes.string)
+};
