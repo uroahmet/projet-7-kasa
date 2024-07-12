@@ -43,7 +43,7 @@ export function ApartmentPage() {
             <div className='apartment__description__area'>
                 <DescriptionPanel title="Description" content={flat.description} />
                 <DescriptionPanel
-                    title="Equipements"
+                    title="Équipements"
                     content={<ul>{flat.equipments.map((eq, index) => (<li key={index}>{eq}</li>))}</ul>}
                 />
             </div>
