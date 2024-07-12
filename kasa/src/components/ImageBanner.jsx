@@ -37,20 +37,33 @@ export function ImageBanner(props) {
     ));
   };
 
+  let arrowLeft;
+  let arrowRight;
+  let countImage;
+
+  if (pictures.length > 1) {
+    arrowLeft = <button className="btn btn-previous" onClick={moveToPrevious}>
+                  <i className="fas fa-chevron-left"></i>
+                </button>;
+  
+    arrowRight =  <button className="btn btn-next" onClick={moveToNext}>
+                  <i className="fas fa-chevron-right"></i>
+                </button>;
+ 
+    countImage = <span className="slide-counter">
+                  {currentPicture + 1} / {pictures.length}
+                </span> ;
+   } 
+   
+
   return (
     <div className="image__banner">
       <div className="image__container">{getCarouselOrDefaultImage()}</div>
       {arePicturesAvailable() && (
         <>
-          <button className="btn btn-previous" onClick={moveToPrevious}>
-            <i className="fas fa-chevron-left"></i>
-          </button>
-          <span className="slide-counter">
-            {currentPicture + 1} / {pictures.length}
-          </span>
-          <button className="btn btn-next" onClick={moveToNext}>
-            <i className="fas fa-chevron-right"></i>
-          </button>
+          {arrowLeft}
+          {countImage}
+          {arrowRight}
         </>
       )}
     </div>
